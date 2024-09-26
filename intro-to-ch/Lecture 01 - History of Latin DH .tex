@@ -1,0 +1,570 @@
+%% Semplice beamer conforme al powerpoint ufficiale
+%% dal sito di Ca' Foscari. Si basa sul tema "default"
+%% mandate Modifiche e migliorie! Guido.Caldarelli@unive.it 
+% Elenco Contributori 
+% Guido Caldarelli, Matteo Brilli 
+
+%\documentclass{beamer}
+% decide below the aspect ratio between 16:9 and 4:3
+%\documentclass[aspectratio=43]{beamer}
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{csquotes}
+\usepackage[style=authoryear,backend=biber]{biblatex}
+\addbibresource{bibliography/intro-ch-01-dh-to-ch.bib}
+\addbibresource{bibliography/intro-ch-02-culturonomics.bib}
+
+\addtolength{\skip\footins}{4pc plus 8pt}
+
+% Questo tema commentato di sotto produce un beamer più tradizionale 
+%\usetheme[secheader]{Boadilla}
+
+
+%%%-----------------------------------------------------------%
+%% Cambia colori da thema default
+%% Questi sono i due colori ufficiali rosso e grigio
+\definecolor {cfred}{rgb}{0.709,0.196,0.329} 	%{ 181 ,50 ,84}
+\definecolor {cfgrey}{rgb}{0.537,0.537,0.537} 	%{ 137,137,137}
+\definecolor {cflink}{rgb}{0.615,0.615,0.607} 	%{157,157,155}
+
+\setbeamercolor{palette primary}{bg=cfred,fg=white}
+\setbeamercolor{palette secondary}{bg=cfred,fg=white}
+\setbeamercolor{palette tertiary}{bg=cfred,fg=white}
+\setbeamercolor{palette quaternary}{bg=cfred,fg=white}
+\setbeamercolor{structure}{fg=cfred}		 % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=cfred} 		 % TOC sections
+% Override palette coloring with secondary
+\setbeamercolor{subsection in head/foot}{bg=cfgrey,fg=white}
+%%%------------------------------------------------------------
+
+%% Definisce il blocco con riquadro che non è presente nel tema default (commentare se si usano altri temi)
+\setbeamercolor{uppercolor}{fg=white,bg=cfred}%
+\setbeamercolor{lowercolor}{fg=black,bg=white}%
+\def \bblock{\begin{beamerboxesrounded}[upper=uppercolor,lower=lowercolor,shadow=true]}
+\def \eblock{\end{beamerboxesrounded}}
+
+\defbeamertemplate{description item}{align left}{\insertdescriptionitem\hfill}
+\setbeamertemplate{description item}[align left]
+%%-----------------------------------------------------------
+
+%% Intestazione ripetuta per ogni slide
+\addtobeamertemplate{headline}{%
+    \vspace{0.25cm} \ \ 
+    \includegraphics[height=1.0cm]{images/fedhlab4.png} 	% sostituire con logobeamIT.png per italiano
+    \hspace{0.541\textwidth}{\color{cflink} {\small Intro. to CH}} %per 16:9 641 for link
+    %\hspace{0.551\textwidth}{\color{cflink} {\small www.unive.it}} %per 4::3
+    \vspace{0.25cm}
+    {\color{cfred} \hrule \hrule  }
+    \textbf{}
+}{}
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}%
+  {\color{cflink} {%
+  Page \insertpagenumber/\inserttotalframenumber~--  CC-BY-NC 4.0 -- thibault.clerice@inria.fr
+}}}}
+
+\setbeamertemplate{page number in head/foot}[appendixframenumber]
+%%-------------------------------------------------------------
+
+%This block of code defines the information to appear in the Title page
+%%%
+\title[Intro to CH] %optional
+{From Digital Humanities to Computational Humanities}\subtitle{The Example of Latin Digital Philology}
+
+\author[Clérice, Thibault] % (optional)
+{T.~Clérice~\inst{1}~\inst{2}}
+
+\institute[Inria] % (optional)
+{
+  \inst{1}%
+  ALMAnaCH, Inria, Paris, France \and
+  \inst{2}%
+  FeDHLab, Università Federico II, Napoli, Italia
+ }
+
+\date[2024] % (optional)
+{Introduction to Computational Humanities}
+
+\setbeamertemplate{frametitle}[default][right, rightskip=.5cm] {}
+\addtobeamertemplate{frametitle}{\vspace*{-1.4cm}}{}
+%End of title page configuration block
+%------------------------------------------------------------
+
+
+%------------------------------------------------------------
+%The next block of commands puts the table of contents at the 
+%beginning of each section and highlights the current section:
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+%------------------------------------------------------------
+
+\setbeamerfont{footnote}{size=\tiny} %reduce the size of the footnote citation
+
+\addtobeamertemplate{footnote}{}{\vspace{2.2ex}}
+\begin{document}
+
+%The next statement creates the title page.
+\frame{\titlepage}
+
+
+\section{Forewords}
+
+\begin{frame}{The courses}
+    \begin{itemize}
+        \item Introduction to Computational Humanities (CH)
+        \item Natural Language Processing for the CH
+        \begin{itemize}
+            \item Syntactical and grammatical annotations
+            \item Semantics
+            \item Machine Translation (Special Guest)
+        \end{itemize}
+        \item Computer Vision for the CH
+        \begin{itemize}
+            \item Handwritten Text Recognition
+            \item Computational Palaeography (October 25, special guest: M. Vlachou)
+            \item Distant Viewing (October 25)
+            \item 3h dataset building project
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{A light warning}
+    \note{I strongly believe that we cannot talk about computational humanities while forgetting the path that led to it, including digital humanities and its first productions. There is a tendency is computational fields, whether it is NLP or Computational Humanities, to forget about the layground that was built over the years, and this presentation serves as a reminder of where we stand, and thanks to whom we are standing here.}
+    This presentation will focus mostly on Classical Latin philology (including Late Antiquity). It might from time to time bring Ancient Greek project into the spotlight, it might also introduce some Medieval references.
+
+    On the other hand, because the documentation is still hard to find, this presentation is mainly focused on French and English classical digital philology. It might be missing references to German, Spanish and more importantly Italian classical philology from the 70s onwards to the 2000s. 
+    
+    Feel free to reach out to me if you think I might be missing something important, or even interrupt me to ask a question or bring additional information.
+\end{frame}
+
+\begin{frame}{A(nother) light warning}
+    Documentation is light, specifically around datation of the first appearance of a corpus. Most researchers did not cite (and still don't) the software they used in the early 80s or 90s, and as a result it is very difficult, without access to the main companies archives, to know (1) when the software was released (as opposed to when it was announced or when the researchers behind it published about it in a journal) and (2) when it came into use. 
+    The same way most of researchers don't cite the specific edition they use (Budé, Teubner, etc.), they do not cite the software, creating not only a huge hole in the history of academic practices, but also a lack of recognition for the work behind these pioneering or fundational works.
+\end{frame}
+
+\begin{frame}{Further readings}
+    Most of the presentation is drawn from the historical research I did for my PhD (written in French), and it is presented here for the first time in English. Much more details are available in it, including more reflexion on the importance of corpora in Classical Philology.
+\end{frame}
+
+%---------------------------------------------------------
+
+\section{The first Age of Digital Humanities}
+
+\subsection{Lemmatization, index and concordances}
+
+\begin{frame}{Roberto Busa, DH's Herodote}
+    \begin{itemize}
+    \item  (November 28, 1913 – August 9, 2011) was an Italian Jesuit priest and one of the pioneers in the usage of computers for linguistic and literary analysis. (Wikipedia)
+    \item Index Thomisticus
+    \item Punched cards, collaboration with IBM, starting in 1949.
+    \item Up to 11 M words in 1980 for 56 volumes.        
+    % \item ``Unacademic'' to some extent.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{The LASLA}
+    \begin{itemize}
+        \item Louis Delatte, Étienne Évrard, 1961 in Liège.
+        \item Statement: statistics needs to be imported in Classical studies and researchers need to stop inventing trends based on few occurrences\footfullcite{delatte_laboratoire_1961}.
+        \item Morphosyntactic annotation of works, punched cards again.
+        \item Starts with Seneca.
+    \end{itemize}
+    \begin{quote}
+        ``Dans combien d'allitérations purement fortuites les commentateurs n'ont-ils pas voulu découvrir les intentions les plus subtiles.''
+
+        ``In how many purely fortuitous alliterations have commentators tried to discover the most subtle intentions?''
+    \end{quote}
+\end{frame}
+
+\begin{frame}{The Liège-Paris war}
+    \begin{itemize}
+        \item Conflict first discovered by N.~Perreaux I believe, \footfullcite{perreaux_lemmatisation_2019}
+        \item Four initial articles: ``A propos d'une concordance'', ``Index ou concordance ?'', ``Index et concordances''.
+        \begin{itemize}
+            \item Intellectual rivalry: P.~Grimal positions himself as a leading expert on Seneca. Criticizes L.~Delatte's 1962 index while preparing his own. Similarly, Delatte defends his 1964 index while critiquing Grimal's 1965 concordance of \textit{ad Marciam}.
+            \item Index vs Concordance debate: A long-standing debate over whether to provide full context (concordance) or just lemma references (index). Revived in 1979 when Delatte and colleagues criticize Roberto Busa's automatically generated concordance.
+            \item Resistance to digital tools: P.~Grimal resists digital methods, whereas L.~Delatte champions them, establishing the \textit{Revue de l'Organisation Internationale pour l'Étude des Langues Anciennes par Ordinateur}. Grimal dismisses computing with material concerns (Who can access a computer then ?) while L.~Delatte simply ignore this fact.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsection{First corpora as text}
+
+\begin{frame}{The NEH corpus: a first ?}
+
+\begin{itemize}
+    \item In his article, Brunner \footfullcite{brunner_classics_1993} mentions an early attempt at creating a digital corpus.
+    \item In 1968, N. Greenberg and J. J. Bateman got a funding from the NEH of 19.800 \$ and an additional 40.000 \$ from secondary funders, including IBM. 59,800~\$ from Dec. 1968 $\approx$ 530,276~\$ in August 2024.
+    \begin{itemize}
+        \item Smumer School (\textit{Summer Institute in Computer Applications to Classical Studies});
+        \item Corpus of 20 (mostly incomplete) works, Latin and Greek.\note{Random selection, unable to understand hwere it comes from: Poem 64 of Catullus, three works from Appendix Vergiliana, 4 non sequential books of Eneid.}
+        \item This corpus is then taken over by the American Philological Association, is sent/copied on demand but has its funding cut.\note{Brunner notes that APA cut the fundings of the corpus but not the Monograph one.}
+    \end{itemize}
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Birth of the Thesaurus Linguae Graecae}
+    \begin{itemize}
+        \item 1971 first words about it \parencite{brunner_classics_1993} but official launch 1973.
+        \item Goals: building a huge corpus of text (not a \textit{Thesaurus} like the \textit{Thesaurus Linguae Latinae}).
+        \item Production means: keying externalized in low salary countries (South Korea, from 1972 to 1980, and then Philipin\footfullcite{helgerson_cd-rom_1988}).
+        \item An issue of its time: in 1972, only 128 characters exist, ASCII, and they do not include polytonic Greek. The betacode was then designed by \textbf{David W. Packard} which proposed combination of ASCII signs to repesent Ancient Greek Characters such as \texttt{a)} for ἀ. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{David W. Packard ?}
+    \begin{itemize}
+        \item Present at the founding meeting of PHI.
+        \item Co-creator of the Packard Humanities Institute (PHI) in 1987~\parencite{helgerson_cd-rom_1988}, as a Latin equivalent to TLG.
+        \item PhD in Classical Philology in 1967, specialized in Linear A.
+        \item Member of the \textit{Special Committee for Computer Problems} in 1968.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{PHI}
+    \begin{itemize}
+        \item Hard to date the first release.
+        \item First CD-ROM in 1991 (PHI\#5).
+        \item Maybe a first version was published in 1987, as a side deliverable of the \textit{Center for Computer Analysis of Text} (CCAT)\footfullcite{groves_tovs_1990}.
+        \item 8 million words in 1994 (far from the 61 millions in Greek\footfullcite{brunner_overcoming_1988} in TLG !).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{The role of big companies in early digital corpora}
+    \begin{itemize}
+        \item IBM funds the NEH corpus and Perseus.
+        \item Apple funds a lot of Harvard-bound projects in the 1980s, including Perseus.
+        \item Xerox funds Perseus.
+        \item David W. Packard is the son of the co-funder of Hewlett-Packard and uses that to fund PHI.
+        \item Marianne McDonald funds the TLG when she is an undergraduate through the wealth of her father, head of the Zenith Corporation: 1 M\$ in 1972 ($\approx$ 7,4 M\$ in August 2024. "Weirdly" enough, she is rarely mentioned in the early documentation.
+    \end{itemize}
+\end{frame}
+
+\subsection{The Personal Computer and the revolution of the 80s}
+
+\begin{frame}{Apparition of the PC}
+
+\begin{table}[h]
+    \centering
+    \footnotesize
+    \begin{tabular}{l|rrr}
+                                                   & 1984 & 1989 & 1993 \\ \hline  \hline
+    Household with a computer & 7.9 & 14.4 & 22.8 \\ \hline 
+    Ages 3-17 with access to a computer at school & 28.0 & 46.0 & 60.6 \\
+    18+ with access to a computer at school & 30.8 & 43.6 & 53.8 \\
+    18+ with access to a computer at work & 24.6 & 36.8 & 45.8 \\ \hline
+    \end{tabular}
+    \caption{Access \% to personal compute in the USA 1984-1993, according to the \textit{U.S.~Census Bureau, Current Population Survey, October 1984, 1989, 1993} cited in Kominski 1999.}
+    \label{tab:computer-ownership}
+\end{table}
+
+\begin{columns}
+    \begin{column}{.45\textwidth}
+        Apparition of Graphical User Interfaces
+    
+        \begin{description}
+            \item[Apple Lisa] 1983 
+            \item[Apple Macintosh] 1984
+            \item[Windows/DOS] 1985
+            \item[CD-ROM] 1984
+        \end{description}
+    \end{column}\hfill
+    \begin{column}{.45\textwidth}
+        \fullcite{kominski1999access}
+    \end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{The slow apparition of Perseus}
+    \note{Need to be clear: Perseus can only appear in a world where personal computer are appearing and gaining traction. Unlike TLG, it does not require a specific hardware and is most likely thought a plug and play.}
+    \begin{itemize}
+        \item Perseus is originally a plug-in for the TLG and is built around the TLG.
+            \begin{itemize}
+                \item It does not aim at replacing it;
+                \item It provides a better full-text search engine;
+                \item It provides translations (later).
+            \end{itemize}
+        \item Origins: 1982, the \textit{Harvard Classics Computer Project}\footfullcite{hughes_bits_1987}: PhD students G. R. Crane, N. Smith, K. Morrell \& E. Mylon as develop for *NIX platforms (specifically for Apple products) a new system to produce and search textual data. 
+        \begin{itemize}
+            \item At the time, TLG is only available on Ibycus, a system developed by Packard and funded by HP.
+            \item MORPHEUS aims at replacing MORPH, developed by Packard for TLG ("lemmatization" and morphological analysis running on the IBYX language, \parencite{hughes_bits_1987}).
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{From HCCP to Perseus}
+    \begin{itemize}
+        \item Not a competitor to TLG / PHI: ``The Perseus Project, with its broad range of materials, was designed to complement the textual focus of the TLG''\footfullcite{mylonas_perseus_1993}
+        \item Focuses on content enriching the environment around the TLG:
+        \begin{itemize}
+            \item Translations, focused on classical works, eyes on secondary schools as well as students and not researchers.
+            \item 10,000 images and videos.
+        \end{itemize}
+        \item Keyed because OCR is just not there yet.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Perseus in a growing world of DH}
+    \begin{description}
+        \item[1986] Standardization of SGML (Ancestor of DH)
+        \item[1987] The Poughkeepsie Meeting and the PoughKeepsie Principles
+        \item[1990] The Text Encodining Initiative
+        \item[1993] E.~Mylonas mentions Lou Burnard and the work on TEI, but is working on SGML.
+    \end{description}
+\end{frame}
+
+\subsection{Patristics ?}
+
+\begin{frame}{Apparition of Digital Patristics}
+    \begin{itemize}
+        \item Independently from the language, and except for the Vulgate / Bible, no Christan related literature is part of the Latin corpora around 1990.
+        \item Paul Tombeur, who funded the \textit{Centre de Traitement Électronique des Documents }(CETEDOC) in 1968 as a local follow-up to the LASLA in Louvain specifically for Late Antiquity and Middle Ages literature.
+        \item In 1981, Tombeur mentions his goal to create a \textit{Thesaurus Patrum Latinorum} based on the \textit{Corpus Christianorum Series Latina} and the \textit{Continuatio Medievalis}.
+        \item Tombeur was in Poughkeepsie in 1987.
+        \item Publishes the \textit{CETEDOC Library of Christian Latin Text on CD-ROM} (CLCLT) with 21 Million words ($\approx$ 300 volumes). It is not meant for reading though, only for searching.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{The Patrologia Latina Database}
+    \begin{itemize}
+        \item Built by the company Chadwyck-Healey.
+        \item Built around SGML TEI and the interface DynaText (might be the first commercial product using TEI).
+        \item Published / Announced around the same time as the CLCLT. \note{Huge academic ``fight'' between Chadwyck-Healey and Tombeur in the Bulletin de Philosophie Médiévale.}
+    \end{itemize}
+
+    \begin{table}[]
+        \centering
+        \footnotesize
+        \resizebox{.5\linewidth}{!}{%
+        \begin{tabular}{l|rrr}
+            \toprule
+                Base                         & Price                  & Adj. for Inflation   & Year \\ \midrule
+                PLD (Announced)              & \textbf{70~000\$}      & 171~964   \$         & 1990 \\
+                PLD (Preorder)               & 45~000\$               & 94~250    \$         & 1995 \\
+                PLD (Negociated)             & \textit{5~000\$}       & 9~324     \$         & 2000 \\
+                CETEDOC                      & 3~800\$                & 8~182     \$         & 1994 \\
+                Perseus                      & 230\$                  & 507       \$         & 1993 \\
+                TLG*                         & 1~035\$                & 2~284     \$         & 1993 \\
+                TLG Online Quote for Shangai & 35~000\$               & 65~271    \$         & 2004 \\
+                PHI (per CD)                 & 50\$                   & 104       \$         & 1995 \\ \bottomrule
+        \end{tabular}}
+        \caption{Pricing of the different options according to various sources.}
+        \label{tab:my_label}
+    \end{table}
+\end{frame}
+
+\begin{frame}{Impact of the digitization of sources ?}
+    \begin{itemize}
+        \item Slow introduction to these tools, might be due to difficult access (price, hardware) but even slower acknowledgements of these.
+        \item J.~J.~Hughes\footfullcite{helgerson_cd-rom_1988} admits that a research for διαθεκε took him 25 minutes for 1079 results in the TLG, while the same search, weeks before, took him nearly a week of book browsing in Cambridge.
+        \item Peter Zahn showed that identifying a new manuscript fragment with some text from Augustine would have taken him 5 minutes with the CLCLT when it took him five days.
+    \end{itemize}
+    All research from the time that cites those tools focus on their ability to speed up content search, none of them mentions them for their potential in computational heavy tasks, including statistics. The data are not "easy" to use, and they are prisonner of their UI.
+\end{frame}
+
+\begin{frame}{A quick note: forgetting women ?}
+    There is an important (and systemic) tendency to erase the role of women in the building of corpora, here are some of the women that nearly disappeared or were often neglected in the early documentation of some projects:
+    \begin{itemize}
+        \item The annotators of Busa\footfullcite{nyhan2017uncovering};
+        \item Marianne McDonald, (co-)funder of TLG\note{Barely cited as a funding member in 1986 but who is rehabilitated on their current website.};
+        \item Elli Mylonas, co-funder of Perseus\note{Not even in the Former Perseus Staff page...}.
+        \item And given the situation, probably others...
+    \end{itemize}
+    An important work of rehabilitation of these historical figures needs to be done, before they are completely forgotten.
+\end{frame}
+
+\section{1995s onwards: from the CD to the web}
+
+\subsection{Digital Philology 2.0 ?}
+
+\begin{frame}{Internet at home ?}
+    \begin{table}[ht]
+    \centering
+    \resizebox{.6\textwidth}{!}{%
+    \begin{tabular}{l|r|rrrrr}
+    \toprule
+                                       & 1998 & 2000     & 2005     & 2010     & 2015     & 2020     \\ \midrule
+    Dial-up Internet (Millions         & 1.28 & 5.26     & 3.75     & 0.48     & 0.09     &          \\
+    xDSL                               &      & 0.07     & 8.90     & 20.23    & 22.66    & 15.96    \\
+    Cable / Optic                      &      &          &          & 1.13     & 4.21     & 14.67    \\ \midrule
+    Total (millions)                                     & 1.28 & 5.33     & 12.65    & 21.84    & 26.96    & 30.63    \\ \midrule
+    Growth in between columns          &      & 416.45 \% & 237.27 \% & 172.69 \% & 123.42 \% & 113.62 \% \\
+    Growth every ten years             &      &         &          & 409.74 \% &          & 140.23 \% \\ \bottomrule
+    \end{tabular}%
+    }
+    \caption[Caption for LOF]{Growth for internet services subscriptions according to the regulating body in France (ARCEP). Mobile phone internet access is excluded from these numbers}
+    \end{table}
+
+    \begin{columns}
+        \begin{column}{.55\linewidth}
+            \begin{description}
+                \item[1995] Perseus starts moving to the web
+                \item[1996] PLD-Online
+                \item[1996] Duke Databank of Documentary Papyri
+                \item[2005] CLCLT (LLT-A after 2009)
+            \end{description}
+        \end{column}
+        \hfill
+        \begin{column}{.45\linewidth}
+            \begin{description}
+                \item[20XX] TLG
+                \item[2011--2015?] PHI
+            \end{description}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Perseus}
+    \begin{itemize}
+        \item Choice of using SGML as the pivot format made the transition quick and easy. Easy to process standards were central to this smooth transition. 
+        \item New ! The Latin corpus joins the team !
+        \item (Partially) dropped: video and images, due to copyright issues here and there...
+    \end{itemize}
+    Still online, and grew towards other goals: better syntactical annotations (treebanking), English texts, named entity recognition. Turning point in 2013 when G. R. Crane gets the Humboldt Chair for Digital Humanities in Leipzig. Started moving toward Perseus 5.0 in order to include new services. Perseus 5.0, Scaife, was published a few years ago but still struggles to overtake 4.0\note{Lack of funding.}.
+\end{frame}
+
+\subsection{Web, Machine Learning and OCR: massification}
+
+\begin{frame}{Individuals}
+
+
+\begin{description}
+    \item[Curculio] by Michael Hendry, in 1995;
+    \item[Bibliotheca Augustana] by Ulrich Harsch (private project), in 1996;
+    \item[Lacus Curtius] by Bill Thayer, in 1998;
+    \item[The Latin Library] by William L. Carey in 1998;
+    \item[Itinera Electronica] by Alain Meurant, in 1998;
+    \item[Roman Law Library] by Yves Lassard \& Alexandr Koptev in 2001; 
+    \item[Remacle] by Philippe Remacle in 2003;
+    \item[Latin, Grec, Juxta] by Gérard Gréco in 2006 (secondary school teacher). 
+\end{description}
+
+Why ? Cost of building a static website is much smaller and easier than building a CD ROM application ! Microsoft Frontpage appears in 1996.
+    
+\end{frame}
+
+\begin{frame}{From simple to more complex}
+
+Databases projects: LAMP projects (Linux-Apache-MySQL-PHP) and ASP web application:
+
+\begin{description}
+    \item[Musisque deoque] 200X;
+    \item[Corpus Grammaticorum Latinorm]
+\end{description}
+    
+\end{frame}
+
+\begin{frame}{From web to XML TEI}
+
+\begin{itemize}
+    \item 2002: TEI starts to move away from SGL and towards XML TEI (end of transition: 2007).
+    \item Digital edition: work on building XML TEI, and then build application or static generator around it
+    \item Very few initiatives in the end, despite the amount of noise, in the classical and late antiquity world:
+    \begin{description}
+        \small
+        \item[DigilibLT] is the first project to really tackle the issue of the lack of coverage of late antiquity outside of patristics.
+        \item[HyperDonat] which, to my knowledge, is the first \textit{big} project for a single digital edition in Latin.
+        \item[Open Greek and Latin] which brings the coverage of some patristics through the CSEL corpus.
+        \item[The Digital Latin Library] by S. J. Huskey with its single edition of Calpurnius.
+        \item[Kroalat] and other projects which focus on something else than canon.
+    \end{description}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The false hope of OCR ?}
+    \begin{itemize}
+        \item In two papers in 2011 and then 2012, G. R. Crane and D. Bamman and then D. A. Smith have their eyes on the use of "a million book library" but this stays at the level of the experiment, and the actual work on OCR remains out of reach for digital edition building.
+        \item During the Humboldt Chair era, OCR (Optical Character Recognition) largely remained an outsourced task, with places like Pondicherry being prominent examples. Even today, many digital projects continue to rely on low-wage countries as a cost-effective solution for text acquisition processes.
+        \item We are starting to see project using not OCR but HTR (Handwritten Text Recognition) to produce transcription or digital edition of small to large corpora.
+    \end{itemize}
+\end{frame}
+
+% \section{The (too good to be true) Promises of OCR ?}
+
+% \subsection{One Million Books ?}
+
+% \subsection{Stagnation}
+
+\section{A Computational Turn ? Review of recent papers}
+
+\begin{frame}{Away from Digital Humanities ?}
+    
+    \begin{quote}{J.-B.~Camps}
+    \enquote{La distinction entre humanités « numériques » et « computationnelles » est dans l’air. Au‑delà d’un pur choix terminologique distinctif ou d’un retour aux \textit{humanities computing} du XXe siècle, la revendication d’une dimension computationnelle rend compte d’un basculement, à mon sens éminemment souhaitable, d’une perspective tournée vers la diffusion et la publication électronique, à un accent mis sur les données et leur exploitation pour la création de nouveaux savoirs scientifiques.}\footnotemark
+    \end{quote}
+    \footnotetext{\fullcite{camps_ou_2018}}
+
+\end{frame}
+
+\begin{frame}{Into Computational Humanities.}
+    \begin{itemize}
+        \item Just after the DH Conference in Leiden, creation of CoHuRe, an answer to the lack of ``suitable research-oriented venue to present and publish their computational work that does not lose sight of questions relevant to the humanities''. \note{It clearly puts DH as an unappropriate place}
+        \begin{itemize}
+            \item \url{https://2020.computational-humanities-research.org/papers/}; \href{https://2020.computational-humanities-research.org/papers/}{2021}
+            \item \url{https://2022.computational-humanities-research.org/programme/};
+            \href{https://2023.computational-humanities-research.org/programme/}{2023};
+            \href{https://2024.computational-humanities-research.org/programme/}{2024}
+        \end{itemize}
+        \item Not the only place: technically, Historical Document Processing at ICDAR, NLP4DH (this year at ACL), etc.
+        \item Group of authors:
+        \begin{itemize}
+            \item Antwerp's Circle: M. Kestemont, F Karsdorp, L Fonteyn, E Manjavacas, W Haverals
+            \item Polish Stylomery Group: J Rybicki, M Eder, A Šeļa, B Nagy
+            \item Chartes' Circle: J.-B. Camps, F. Cafiero, S. Gabay, M. Puren, A. Pinche
+            \item Perseus Connection: D. Bamman, D. Smith, N. Coffee, D. Mimno, M Romanello
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Computational Philology}
+    \footnotesize
+    \begin{itemize}
+        \item Authorship verification/attribution: \fullcite{kestemont2016authenticating}
+        \item Text generation: \fullcite{assael2022restoring}
+        \item Stylistic: \fullcite{nagy2024not}
+        \item Text Reuse: \fullcite{manjavacas-etal-2019-feasibility}
+        \item Semantics: \fullcite{clerice-2024-detecting}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Both can, need and should cohabit}
+    \begin{itemize}
+        \item ``The digital humanities pivot around data''\footfullcite{poole_now_2013};
+        \item Data are then ``computed upon''. But they need to be open\note{LASLA}
+        \item We do not need a shift, as JB Camps worded it out, but a balance and a cohabitation.
+        \item Computational Humanities is only possible thanks to the Digital Humanities, and DH strives through CH.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Next sessions}
+    Not in order
+    \begin{itemize}
+        \item October 10th: Culturonomics 
+        \item October 24th: Unseen Species Models and Cultural Heritage Artefacts Survival (M. Kestemont)
+        \item Stylometry and authorship identification (F. Cafiero)
+        \item Questioning the Canon
+        \item Computational Narrative Analysis
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Next session's papers}
+    \begin{itemize}
+        \item \fullcite{michel2011quantitative}
+        \item \fullcite{perreaux:halshs-01148891}
+        \item \fullcite{denove2024industrial}
+        \item \fullcite{camps2023make}
+    \end{itemize}
+\end{frame}
+
+\end{document}

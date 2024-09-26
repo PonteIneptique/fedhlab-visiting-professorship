@@ -1,0 +1,140 @@
+%% Semplice beamer conforme al powerpoint ufficiale
+%% dal sito di Ca' Foscari. Si basa sul tema "default"
+%% mandate Modifiche e migliorie! Guido.Caldarelli@unive.it 
+% Elenco Contributori 
+% Guido Caldarelli, Matteo Brilli 
+
+%\documentclass{beamer}
+% decide below the aspect ratio between 16:9 and 4:3
+%\documentclass[aspectratio=43]{beamer}
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{csquotes}
+\usepackage[style=authoryear,backend=biber]{biblatex}
+\addbibresource{bibliography/intro-ch-02-culturonomics.bib}
+
+\addtolength{\skip\footins}{4pc plus 8pt}
+
+% Questo tema commentato di sotto produce un beamer più tradizionale 
+%\usetheme[secheader]{Boadilla}
+
+
+%%%-----------------------------------------------------------%
+%% Cambia colori da thema default
+%% Questi sono i due colori ufficiali rosso e grigio
+\definecolor {cfred}{rgb}{0.709,0.196,0.329} 	%{ 181 ,50 ,84}
+\definecolor {cfgrey}{rgb}{0.537,0.537,0.537} 	%{ 137,137,137}
+\definecolor {cflink}{rgb}{0.615,0.615,0.607} 	%{157,157,155}
+
+\setbeamercolor{palette primary}{bg=cfred,fg=white}
+\setbeamercolor{palette secondary}{bg=cfred,fg=white}
+\setbeamercolor{palette tertiary}{bg=cfred,fg=white}
+\setbeamercolor{palette quaternary}{bg=cfred,fg=white}
+\setbeamercolor{structure}{fg=cfred}		 % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=cfred} 		 % TOC sections
+% Override palette coloring with secondary
+\setbeamercolor{subsection in head/foot}{bg=cfgrey,fg=white}
+%%%------------------------------------------------------------
+
+%% Definisce il blocco con riquadro che non è presente nel tema default (commentare se si usano altri temi)
+\setbeamercolor{uppercolor}{fg=white,bg=cfred}%
+\setbeamercolor{lowercolor}{fg=black,bg=white}%
+\def \bblock{\begin{beamerboxesrounded}[upper=uppercolor,lower=lowercolor,shadow=true]}
+\def \eblock{\end{beamerboxesrounded}}
+
+\defbeamertemplate{description item}{align left}{\insertdescriptionitem\hfill}
+\setbeamertemplate{description item}[align left]
+%%-----------------------------------------------------------
+
+%% Intestazione ripetuta per ogni slide
+\addtobeamertemplate{headline}{%
+    \vspace{0.25cm} \ \ 
+    \includegraphics[height=1.0cm]{images/fedhlab4.png} 	% sostituire con logobeamIT.png per italiano
+    \hspace{0.541\textwidth}{\color{cflink} {\small Intro. to CH}} %per 16:9 641 for link
+    %\hspace{0.551\textwidth}{\color{cflink} {\small www.unive.it}} %per 4::3
+    \vspace{0.25cm}
+    {\color{cfred} \hrule \hrule  }
+    \textbf{}
+}{}
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}%
+  {\color{cflink} {%
+  Page \insertpagenumber/\inserttotalframenumber~--  CC-BY-NC 4.0 -- thibault.clerice@inria.fr
+}}}}
+
+\setbeamertemplate{page number in head/foot}[appendixframenumber]
+%%-------------------------------------------------------------
+
+%This block of code defines the information to appear in the Title page
+%%%
+\title[Intro to CH] %optional
+{From Digital Humanities to Computational Humanities}\subtitle{The Example of Latin Digital Philology}
+
+\author[Clérice, Thibault] % (optional)
+{T.~Clérice~\inst{1}~\inst{2}}
+
+\institute[Inria] % (optional)
+{
+  \inst{1}%
+  ALMAnaCH, Inria, Paris, France \and
+  \inst{2}%
+  FeDHLab, Università Federico II, Napoli, Italia
+ }
+
+\date[2024] % (optional)
+{Introduction to Computational Humanities}
+
+\setbeamertemplate{frametitle}[default][right, rightskip=.5cm] {}
+\addtobeamertemplate{frametitle}{\vspace*{-1.4cm}}{}
+%End of title page configuration block
+%------------------------------------------------------------
+
+
+%------------------------------------------------------------
+%The next block of commands puts the table of contents at the 
+%beginning of each section and highlights the current section:
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+%------------------------------------------------------------
+
+\setbeamerfont{footnote}{size=\tiny} %reduce the size of the footnote citation
+
+\addtobeamertemplate{footnote}{}{\vspace{2.2ex}}
+\begin{document}
+
+%The next statement creates the title page.
+\frame{\titlepage}
+
+
+\section{Introduction}
+
+\begin{frame}{Culturonomics, corpus linguistics, what changed ?}
+    \fullcite{brunet:hal-01362715}
+\end{frame}
+
+\begin{frame}{Today's papers}
+
+    \begin{itemize}
+        \item \fullcite{michel2011quantitative}
+        \item \fullcite{perreaux:halshs-01148891}
+        \item \fullcite{denove2024industrial}
+        \item \fullcite{camps2023make}
+    \end{itemize}
+    
+\end{frame}
+
+\section{Funding Paper of Culturonomics}
+
+\begin{frame}{}
+    
+\end{frame}
+
+\end{document}
