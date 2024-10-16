@@ -1,0 +1,110 @@
+% MyCustomTheme.sty
+% Package for custom Beamer theme
+
+\ProvidesPackage{CustomTheme}[2024/10/16 Custom Beamer Theme]
+
+% Input encoding and useful packages
+% \RequirePackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\RequirePackage{fontspec}
+\RequirePackage{booktabs}
+\RequirePackage[outputdir=../]{minted}
+\RequirePackage[style=authoryear,backend=biber]{biblatex}
+\RequirePackage{xcolor}
+\RequirePackage{csquotes}
+% Adjust footnote space
+\addtolength{\skip\footins}{4pc plus 8pt}
+
+% Custom colors
+\definecolor{cfred}{rgb}{0.709, 0.196, 0.329} % red
+\definecolor{cfgrey}{rgb}{0.537, 0.537, 0.537} % grey
+\definecolor{cflink}{rgb}{0.615, 0.615, 0.607} % link color
+
+% Beamer palette colors
+\setbeamercolor{palette primary}{bg=cfred,fg=white}
+\setbeamercolor{palette secondary}{bg=cfred,fg=white}
+\setbeamercolor{palette tertiary}{bg=cfred,fg=white}
+\setbeamercolor{palette quaternary}{bg=cfred,fg=white}
+\setbeamercolor{structure}{fg=cfred} % itemize, enumerate, etc.
+\setbeamercolor{section in toc}{fg=cfred} % TOC sections
+\setbeamercolor{subsection in head/foot}{bg=cfgrey,fg=white}
+
+% Define custom block
+\setbeamercolor{uppercolor}{fg=white,bg=cfred}
+\setbeamercolor{lowercolor}{fg=black,bg=white}
+\newcommand{\bblock}{\begin{beamerboxesrounded}[upper=uppercolor,lower=lowercolor,shadow=true]}
+\newcommand{\eblock}{\end{beamerboxesrounded}}
+
+% Description item alignment
+\defbeamertemplate{description item}{align left}{\insertdescriptionitem\hfill}
+\setbeamertemplate{description item}[align left]
+
+% Custom headline for each slide
+\newcommand{\CustomHeadline}{%
+    \vspace{0.25cm} \ \ 
+    \includegraphics[height=1.0cm]{images/fedhlab4.png}  % Replace with the correct path/logo
+    \hspace{0.541\textwidth}{\color{cflink} {\small Intro. to CH}} % Adjust width for different layouts
+    \vspace{0.25cm}
+    {\color{cfred} \hrule \hrule}
+    \textbf{}
+}
+\addtobeamertemplate{headline}{\CustomHeadline}{}
+
+% Custom footline
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}%
+  {\color{cflink} {Page \insertpagenumber/\inserttotalframenumber~--  CC-BY-NC 4.0 -- thibault.clerice@inria.fr}}
+}}
+
+% Page number in appendix frames
+\setbeamertemplate{page number in head/foot}[appendixframenumber]
+
+\author[Clérice, Thibault] % (optional)
+{T.~Clérice~\inst{1}~\inst{2}}
+
+\institute[Inria] % (optional)
+{
+  \inst{1}%
+  ALMAnaCH, Inria, Paris, France \and
+  \inst{2}%
+  FeDHLab, Università Federico II, Napoli, Italia
+ }
+
+\date[2024] % (optional)
+{Introduction to Computational Humanities}
+
+\setbeamertemplate{frametitle}[default][right, rightskip=.5cm] {}
+\addtobeamertemplate{frametitle}{\vspace*{-1.4cm}}{}
+%End of title page configuration block
+%------------------------------------------------------------
+
+
+%------------------------------------------------------------
+%The next block of commands puts the table of contents at the 
+%beginning of each section and highlights the current section:
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+%------------------------------------------------------------
+
+\setbeamerfont{footnote}{size=\tiny} %reduce the size of the footnote citation
+
+\addtobeamertemplate{footnote}{}{\vspace{2.2ex}}
+
+% \lstdefinestyle{myCustomMatlabStyle}{
+%   language=python,
+%   numbers=left,
+%   stepnumber=1,
+%   numbersep=10pt,
+%   tabsize=4,
+%   showspaces=false,
+%   showstringspaces=false
+% }
+
+\usemintedstyle{borland}
+\endinput
