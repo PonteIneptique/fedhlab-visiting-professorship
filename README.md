@@ -5,6 +5,7 @@ Courses
 
 - Week 1, From Digital Humanities to Computational Humanities - [Slides](https://github.com/PonteIneptique/fedhlab-visiting-professorship/releases/download/Week-01/Intro-to-CH-01.pdf)
 - Week 2, Culturomics ? - [Slides](https://github.com/PonteIneptique/fedhlab-visiting-professorship/releases/download/Week-02/Intro-to-CH-02-Culturomics.pdf)
+- Week 3, Computational Narrative Analysis - [Slides](https://github.com/PonteIneptique/fedhlab-visiting-professorship/releases/download/week-03-day-01/Intro-to-CH-03-Computational-Narrative-Analysis.pdf)
 
 ## Natural Language Processing for Computational Humanities
 
