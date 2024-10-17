@@ -53,7 +53,7 @@
 % Custom footline
 \setbeamertemplate{footline}[text line]{%
   \parbox{\linewidth}{\vspace*{-8pt}%
-  {\color{cflink} {Page \insertpagenumber/\inserttotalframenumber~--  CC-BY-NC 4.0 -- thibault.clerice@inria.fr}}
+  {\color{cflink} {Page \insertframenumber/\inserttotalframenumber~--  CC-BY-NC 4.0 -- thibault.clerice@inria.fr}}
 }}
 
 % Page number in appendix frames
@@ -88,6 +88,12 @@
   \begin{frame}
     \frametitle{Table of Contents}
     \tableofcontents[currentsection]
+  \end{frame}
+}\AtBeginSubsection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsubsection]
   \end{frame}
 }
 %------------------------------------------------------------
