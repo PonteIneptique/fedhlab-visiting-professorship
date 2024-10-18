@@ -19,8 +19,7 @@ Courses
 
 ## Computer Vision for Computational Humanities
 
-- Week 1, Handwritten Text Recognition
-  - Camps, J. B., Clérice, T., & Pinche, A. (2021). Noisy medieval data, from digitized manuscript to stylometric analysis: Evaluating Paul Meyer’s hagiographic hypothesis. Digital Scholarship in the Humanities, 36(Supplement_2), ii49-ii71.
+- Week 1, Handwritten Text Recognition - [Slides](https://github.com/PonteIneptique/fedhlab-visiting-professorship/releases/download/week-03-day-02/CV4CH-01-HTR.pdf)
   - Clérice, T., Pinche, A., Vlachou-Efstathiou, M., Chagué, A., Camps, J. B., Levenson, M. G., ... & Kiessling, B. (2024, August). CATMuS Medieval: A multilingual large-scale cross-century dataset in Latin script for handwritten text recognition and beyond. In International Conference on Document Analysis and Recognition (pp. 174-194). 
 - Week 2, Session 1, (Malamatenia Vlachou-Efstathiou) Digital Palaeography
 - Week 2, Session 2, Distant Viewing
