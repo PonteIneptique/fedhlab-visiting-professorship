@@ -3,9 +3,13 @@
 
 \addbibresource{cv-for-ch/01-HTR.bib}
 
+\newfontfamily{\junicodeFont}{Junicode-Regular.ttf}
+\newcommand{\juni}[1]{{\junicodeFont #1}}
+\newcommand{\character}[1]{{‹#1›}}
+\newcommand{\mss}[1]{\textit{#1}}
+
 \title[CV 4 CH]{Handwritten Text Recognition}\subtitle{Usability, Reusability and Exploitations}
 \date[2024]{Computer Vision for CH}
-
 \begin{document}
 
 %The next statement creates the title page.
@@ -362,8 +366,113 @@
 
 \begin{frame}{Paper}
     \fullcite{clerice2024catmus}
+
+    Also \url{https://catmus-guidelines.github.io} and \url{https://huggingface.co/datasets/CATMuS/medieval}
 \end{frame}
 
-% \section{Wauchier 2019}
+\begin{frame}{Guidelines: Characters}
+    \begin{itemize}
+        \item Graphic distinctions for the same character like \character{s} (\enquote{round \character{s}}) and \character{ſ} (\enquote{long} \character{s}), or \character{\juni{ꝛ}} (\enquote{round} \character{r}) and \character{r} (\enquote{short} \character{r}), are disregarded to mitigate potential cascading effects on other letters like a, d, e, etc.
+        \item Ligatures between letters, such as \character{st} or \character{ct}, are treated as variations in form, leading to the independent transcription of their constituent characters.
+        \item Any emphasis on the letter, regardless of its form, is transcribed as capital letters, including if the emphasis is only conveyed by the size of the letter (and does not result in a different shape).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Guidelines: Abbreviation}
+    The various signs fall into two main categories:
+    \begin{enumerate}
+        \item A large number are additions to base letters with diacritical marks, such as macrons (\textit{e.g.} \character{ē} for \textit{est}, \textit{-em}, etc.), and superscript letters (\character{q\textsuperscript{i}} for \textit{qui}), and their meaning is often context-dependent. Diacritics are thus treated as separate characters using Unicode decomposed form (NFD).
+        \item Few are separate semantically distinct signs, such as \character{\&} for \textit{et/e}), or letters with strike-through marks, such as \character{\juni{ꝑ}}. For these, we resorted to the  Medieval Unicode Font Initiative (MUFI) \cite{mufi2009}.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Guidelines: Ponctuation}
+    \begin{itemize}
+        \item Single full stops are transcribed as \character{.};
+        \item Double signs are represented by \character{;};
+        \item Commas are transcribed as \character{,},
+        \item Question marks are transcribed as \character{?}, as soon as they appear in the Latin inventory in late middle ages.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[shrink=10]{Datasets}
+\vspace{1em}
+    \begin{table}
+    \centering
+    \resizebox{.9\linewidth}{!}{
+    \begin{tabular}{lcrccccccr}
+        \toprule
+Dataset                            & Type    & Century   & Language     & Script type   & Task         & Abbr. & Char.      & Modern.    & Quantity    \\ 
+                                   &         &           &              &               &              &  Res. & Var.       &            &             \\ \hline
+IAMHistDB/St. Gall                 & Mss     & 9         & Latin         & Bookscript    & HTR          &            &            &            & 1,410 l.    \\ 
+IAMHistDB/Perzival                 & Mss     & 13        & German       & Bookscript    & HTR          & \checkmark & \checkmark &            & 4,477 l.    \\ 
+ICFHR 2016-READ                    & Mss     & 15-19     & Ger.         & Modern        & HTR          &            &            &            & 10,550 l.   \\ 
+ORIFLAMMS                          & Mss     & 12-14     & French, Lat. & Book., Docum. & HTR          & \checkmark & \checkmark & \checkmark & 120,111 l.  \\
+HIMANIS                            & Mss     & 14-15     & Fr., Lat.    & Documentary   & HTR          & \checkmark & \checkmark & \checkmark & 23,112 l.   \\
+HOME - Alcar                       & Mss     & 12-14     & Fr., Lat.    & Bookscripts   & HTR, NER     & \checkmark &            & \checkmark & 74806 l.    \\
+e-NDP                              & Mss     & 14-16     & Fr., Lat.    & Documentary   & HTR          & \checkmark &            & \checkmark & 33,735 l.   \\ 
+RODRIGO                            & Mss     & 16        & Spanish      & Bookscript    & HTR          &            &            &            & 20,357 l.   \\ 
+Esposalles/INDEX                   & Mss     & 15        & Catalan      & Modern        & HTR          &            &            &            & 1,563 l.    \\ 
+LAM                                & Mss     & 17-18     & Italian      & Modern        & HTR, DC      &            &            &            & 25,823 l.   \\ \midrule
+MPS                                & Mss     & 13-16     & Dutch        & Documentary   & DC           &            &            &            & 1,706 d.    \\ 
+CLAMM                              & Mss     & 5-15      & Lat.         & Bookscripts   & SC, DC       &            &            &            & 10,800 i.   \\ 
+Multiple Font Groups & EP      & 15-17     & Multi.       & Fonts         & FC           &            &            &            & 35,623 i.   \\ \midrule
+\only<2>{
+CATMuS (Ours)             & Mss, EP & 8-16      & Multi.       & Bookscripts   & HTR, SC, DC  &            &            &            & 165,347 l.  \\
+                                   &         &           &              & Documentary   &              &            &            &            &             \\
+                                   &         &           &              & Fonts         &              &            &            &            &             \\ \bottomrule }
+    \end{tabular}}
+    \caption{Overview of parallel datasets. \textit{Abbr. Res.} = resolved abbreviations. \textit{Char. Var.} = allographetic \character{s}/\character{\juni{ſ}}). \textit{Modern.} = edition-like modernization. Mss stands for Manuscripts, EP for Early Prints, SC/FC/DC for Script, Font, and Date Classification.}
+    \label{tab:concurrent_datasets}
+\end{table}
+\end{frame}
+
+\begin{frame}{Dataset: Scripts}
+    \begin{figure}[t]
+        \centering
+        \includegraphics[width=\linewidth]{cv-for-ch/images/Scripts.png}
+        \caption{Representative examples of the main script types lines, with CATMuS annotations.}
+        \label{fig:script-reference}
+    \end{figure}
+    
+\end{frame}
+
+\begin{frame}{Dataset: Statistics}
+    
+    \begin{figure}[h]
+      \begin{subfigure}[T]{0.40\textwidth}
+        \includegraphics[width=\linewidth]{cv-for-ch/images/language.century.png}
+      \end{subfigure}
+      \hfill
+      \begin{subfigure}[T]{0.40\textwidth}
+        \includegraphics[width=\linewidth]{cv-for-ch/images/language.script.png}
+      \end{subfigure}
+      \caption{Distribution of the dataset across languages, centuries, and scripts, in \% of the total character count.}
+      \label{fig:lang-cent-script}
+    \end{figure}
+    
+\end{frame}
+
+\begin{frame}{Fine-tuning}
+    \begin{columns}
+        \begin{column}{.5\linewidth}
+            \begin{itemize}
+                \item 20 manuscripts
+                \item 10 epochs (each line seen ten times at most)
+                \item Doable on a modern laptop in $\leq 10$ minutes ($\nearrow$ accessibility, $\searrow$ power consumption)
+                \item 50 \% of their lines for training the model, 50 \% to test
+                
+            \end{itemize}
+        \end{column}
+        \begin{column}{.5\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{cv-for-ch/images/finetuning.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Generic yet specialized ?}
+    \fullcite{kiessling:hal-04704547}
+\end{frame}
 
 \end{document}
